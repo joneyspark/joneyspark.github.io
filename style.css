@@ -2,20 +2,6 @@
 	margin: 0;
 	padding: 0;
 }
-.main-wrap{
-	width: 1300px;
-	margin: 0 auto;
-}
-.css-overflow{
-	width: 100%;
-	display: flex;
-}
-.before-overflow{
-	width: 50%
-}
-.after-overflow{
-	width: 50%
-}
 
 .textcss {
     position: absolute;
@@ -33,24 +19,7 @@ h1 {
 	letter-spacing: 1px;
 	box-shadow: 2px 3px 3px #ddd;
 }
-h1.before-title{
-	background-color: hotpink;
-}
-h1.after-title{
-	background-color: forestgreen;
-}
 
-div.content {
-    height: 100px;
-    border: 1px solid;
-    background-color: #6495ed;
-    padding: 15px;
-}
-.content.after-content {
-    overflow: auto;
-    color: #fff;
-    background-color: #008b8b;
-}
 
 /*Css Animation*/
 
@@ -167,10 +136,7 @@ div.content {
   .css-overflow{
 	  display: block;
 	}
-  .before-overflow,
-  .after-overflow {
-    margin-bottom: 100px;
-}
+
 #css-anmation{
 	width: 500%;
 	overflow-x: hidden;
