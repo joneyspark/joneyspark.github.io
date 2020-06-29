@@ -169,7 +169,7 @@ div.content {
 	}
   .before-overflow,
   .after-overflow {
-    width: 100%;
+    margin-bottom: 100px;
 }
 #css-anmation{
 	width: 500%;
