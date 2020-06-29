@@ -177,7 +177,14 @@ div.content {
 }
 
 .motorcycle{
-	left: 5%;
+	left: 8%;
+}
+.textcss{
+	text-align: left;
+}
+
+.textcss h1{
+	font-size: 8px;
 }
 
 
