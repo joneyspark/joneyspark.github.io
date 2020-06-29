@@ -138,20 +138,21 @@ h1 {
 	}
 
 #css-anmation{
-	width: 500%;
+	width: 100%;
 	overflow-x: hidden;
 }
 
 .motorcycle{
 	left: 8%;
 }
-.textcss{
-	text-align: left;
-}
 
 .textcss h1{
-	font-size: 8px;
+	font-size: 12px;
 }
 
+.road{
+	width: 1500%;
+	background-repeat: repeat-x;
+}
 
 }
