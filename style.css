@@ -106,8 +106,8 @@ div.content {
 	position: absolute;
 	width: 250px;
 	height: 200px;
-	left: 50%;
-	transform: translateX(-50%);
+	left: 15%;
+	transform: translateX(0%);
 	bottom: 130px;
 	z-index: 2;
 	
