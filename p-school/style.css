@@ -1,0 +1,184 @@
+body{
+	font-family: 'Poppins', sans-serif !important;
+}
+
+/*header style*/
+
+header#header {
+    background-color: #f0fff0;
+}
+.banner-content small {
+    font-size: 20px;
+    color: #f00;
+}
+.banner-content h1 {
+    font-size: 46px;
+    font-weight: 700;
+}
+.banner-content h1 > span {
+    color: #21b573;
+}
+.banner-content p {
+    line-height: 2;
+    margin-top: 30px;
+}
+.banner-content button {
+    background-color: #21b573;
+    border: 0px;
+    padding: 10px 25px;
+    border-radius: 25px;
+    margin-top: 15px;
+}
+button.buy-btn{
+	background-color: #21b573;
+    border: 0px;
+    padding: 5px 20px;
+    border-radius: 25px;
+    margin-top: 15px;
+}
+li.nav-item.sign-btn {
+    background-color: #21b573;
+    border-radius: 20px;
+}
+li.nav-item.sign-btn a {
+    color: #fff !important;
+}
+
+/*end header*/
+
+/*info section*/
+
+.info-box {
+    text-align: center;
+    background-color: #f8fffb;
+    padding: 30px;
+    transition: .3s ease-in-out;
+}
+.info-box img {
+    display: inline-block;
+}
+.info-box strong {
+    display: block;
+    margin-top: 15px;
+    font-size: 24px;
+    font-weight: 500;
+}
+.info-box:hover {
+    background-color: #fff;
+    box-shadow: 0px 0 15px #cccccc;
+}
+
+/*end info section*/
+
+/*online course section*/
+section#online-course {
+    background-color: #f7f7f7;
+}
+/*end online course*/
+.card-body.card-body-custom {
+    padding: .25rem;
+    margin-top: 15px;
+}
+
+.card-body.card-body-custom strong {
+    font-weight: normal;
+    display: block;
+}
+.card-footer-custom {
+    margin-top: 30px;
+}
+
+.card.card-custom {
+    border-radius: 15px;
+    border: 0px;
+    box-shadow: 0 0 15px #ddd;
+}
+h1.section-heading {
+    padding: 35px 0;
+    font-weight: 600;
+}
+section#testimonial {
+    padding: 35px 0;
+}
+
+/*End*/
+
+/*FOOTER STYLE*/
+
+footer {
+    background-color: #282531;
+    color: #fff;
+}
+.footer-widget {
+    padding: 60px 0;
+}
+.footer-bottom {
+    text-align: center;
+}
+
+.footer-widget p {
+    font-size: 14px;
+    line-height: 2;
+}
+.footer-widget ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.footer-widget ul li a {
+    color: #fff;
+    line-height: 1.8;
+}
+
+/*responsive style*/
+@media (max-width: 720px){
+	.navbar-logo-custom {
+    	width: 70%;
+	}
+	.navbar-logo-custom img {
+	    max-width: 100%;
+	}
+	li.nav-item.sign-btn{
+		background-color: transparent;
+	}
+	li.nav-item.sign-btn a {
+	    color: #fff !important;
+	    background-color: #21b573;
+	    display: inline-block;
+	    padding: 5px 15px;
+	    border-radius: 5px;
+	    margin-top: 15px;
+	}
+	.banner-content h1{
+		font-size: 34px;
+	}
+	.card.card-custom{
+		margin-bottom: 30px;
+	}
+	.author-img {
+	    text-align: center;
+	}
+	.review-content {
+	    text-align: center;
+	    margin-top: 30px;
+	}
+	.footer-widget {
+	    padding: 15px 0;
+	}
+	.footer-bottom {
+	    margin-top: 30px;
+	}
+
+
+}
+
+
+@media (min-width: 992px){
+	.navbar-expand-lg .navbar-nav.p-school-nav .nav-link {
+	    padding-right: 20px;
+	    padding-left: 20px;
+	    color: #333;
+	}
+
+
+}
