@@ -122,4 +122,8 @@ p.footer-bottom {
 	p.footer-bottom a {
 	    color: #5429ff;
 	}
+	#keybord {
+	    position: relative;
+	    left: 25px;
+	}
 }
