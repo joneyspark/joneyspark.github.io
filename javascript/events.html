@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Events</title>
+</head>
+<body>
+    <button id="btn-1" class="btn-1">Button-1</button>
+    <button id="btn-2" class="btn-2">Button-2</button>
+    <button id="btn-3" class="btn-3">Button-3</button>
+
+    <!-- Event delegate and purpose of Event bubble -->
+
+    <div class="event-delegat">
+        <ul id="item-parent">
+            <li class="item">Lorem ipsum dolor sit amet consectetur adipisicing.</li>
+            <li class="item">Officia, dolores rem numquam voluptas odit incidunt?</li>
+            <li class="item">Nobis quia voluptas, beatae facere quisquam ad!</li>
+            <li class="item">Dolore, facilis nobis tempore reiciendis accusantium neque?</li>
+            <li class="item">Aspernatur eaque labore alias iste expedita culpa!</li>
+        </ul>
+        <button id="add-newitem">Add New List Item</button>
+    </div>
+
+    <script>
+        let btnEvent = document.getElementById("btn-1");
+        btnEvent.addEventListener("click", eventHandler);
+        function eventHandler(){
+            document.body.style.backgroundColor = "red";
+        }
+    </script>
+    <script src="events.js"></script>
+</body>
+</html>

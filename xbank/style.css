@@ -1,0 +1,34 @@
+.login-area {
+    border: 1px solid #ddd;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0px 1px 10px #d4d4d4;
+}
+.login-area > h3 {
+    margin: 5px 0px 15px 0;
+}
+#transaction-area{
+    display: none;
+}
+.amount-box{
+    border: 1px solid #ddd;
+    padding: 15px;
+    border-radius: 15px;
+    color: #fff;
+}
+.amount-box.purple {
+    background-color: mediumpurple;
+}
+.amount-box.orange {
+    background-color: coral;
+}
+.deposit-area {
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 15px;
+    box-shadow: 1px 1px 10px #ddd;
+}
+
+.deposit-area input {
+    margin: 20px 0;
+}
