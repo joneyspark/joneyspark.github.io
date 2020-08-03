@@ -20,7 +20,7 @@ codeGeneratorBtn.addEventListener('click', function () {
         codeGeneratorBtn.disabled = false
         codeGeneratorBtn.style.backgroundColor = "#495BC3"
         location.reload()
-    }, 32000);
+    }, 34000);
 
     //submit button enable
     disableButton(false, 'matchButton')
