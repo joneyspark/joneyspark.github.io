@@ -1,0 +1,23 @@
+.product{
+    display: flex;
+    border-bottom: 1px solid #ddd;
+}
+.product-name{
+    padding: 2%;
+}
+.product-name > h4 {
+    color: blue;
+}
+button.addToCartBtn {
+    background-color: #f0c14b;
+    border-color: #a88734 #9c7e31 #846a29;
+    border: none;
+    padding: 7px 60px;
+    border-style: solid;
+    border-width: 1px;
+    color: #333;
+    cursor: pointer;
+}
+button.addToCartBtn > svg {
+    padding-right: 5px;
+}

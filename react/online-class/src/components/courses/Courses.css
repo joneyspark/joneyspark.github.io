@@ -1,0 +1,33 @@
+.coures-container img {
+    width: 100%;
+    padding-bottom: 15px;
+}
+.coures-container .card {
+    background-color: #021126;
+    color: #fff;
+    min-height: 480px;
+    margin-bottom: 30px;
+}
+.details-left p, .detail-right p {
+    margin: 0;
+}
+.enroll-div {
+    text-align: center;
+    margin-top: 20px;
+}
+.detail-right a {
+    background-color: #16adfb;
+    padding: 1px 5px;
+    color: #fff;
+    border-radius: 15px;
+}
+.enroll-div button {
+    background-color: #16adfb;
+    border: none;
+    font-size: 16px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+.coures-container .card-body > h5 {
+    min-height: 50px;
+}

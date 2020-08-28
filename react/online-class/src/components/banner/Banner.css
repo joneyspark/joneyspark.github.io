@@ -1,0 +1,12 @@
+.banner-container{
+    background: url('/banner.webp');
+    background-position: center;
+}
+.bannertext {
+    color: #fff;
+    padding: 45px;
+
+}
+.bannertext > h1, .bannertext > p {
+    padding: 0 30px;
+}

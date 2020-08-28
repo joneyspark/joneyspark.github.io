@@ -1,0 +1,28 @@
+.cartCourse {
+    width: 300px;
+    background-color: #021126;
+    color: #fff;
+    position: relative;
+}
+.cartCourse:after {
+    position: absolute;
+    width: 80%;
+    height: 1px;
+    background-color: #fbfbfb;
+    content: '';
+    top: 0;
+    left: 10%;
+}
+.cart-left {
+    margin-right: 15px;
+}
+.cart-right > p {
+    font-size: 12px;
+}
+.cart-right > p {
+    font-size: 12px;
+    margin: 5px 0;
+}
+.cart-right {
+    text-align: left;
+}

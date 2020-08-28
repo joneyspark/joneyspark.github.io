@@ -1,0 +1,16 @@
+.country-container {
+    width: 21%;
+    height: auto;
+    background: lightskyblue;
+    float: left;
+    margin: 10px;
+    position: relative;
+    padding: 1%;
+    box-shadow: 3px 2px 5px #ddd;
+}
+.country-container img{
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: 1px solid #ddd;
+}

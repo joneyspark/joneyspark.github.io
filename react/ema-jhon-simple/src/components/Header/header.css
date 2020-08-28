@@ -1,0 +1,22 @@
+.logoSec{
+    text-align: center;
+}
+.logo{
+    width: 230px;
+    text-align: center;
+}
+.header nav{
+    text-align: center;
+    background-color: black;
+}
+.header nav a{
+    color: #ffffff;
+    padding: 7px 10px;
+    margin: 5px;
+    display: inline-block;
+    text-decoration: none;
+}
+.header nav a:hover{
+    background-color: lightgray;
+    color: #000;
+}

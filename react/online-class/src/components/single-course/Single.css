@@ -1,0 +1,25 @@
+.cartbox{
+    background-color: #16adfb;
+    color: #fff;
+    display: inline-block;
+    margin-top: 30px;
+}
+.cart-wraper {
+    width: 100%;
+    text-align: center;
+}
+.cartbox {
+    width: 300px;
+    padding: 0%;
+}
+.cart-calculation {
+    padding: 0px 25px;
+    border-bottom: 1px solid #dadada4f;
+}
+
+h4.total-added {
+    padding: 0 25px;
+}
+.cart-calculation p {
+    margin: 2px 0;
+}

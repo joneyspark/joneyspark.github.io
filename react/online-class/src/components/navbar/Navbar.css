@@ -1,0 +1,46 @@
+.nav-menu > nav {
+    background-color: #021126;
+}
+.nav-menu > nav > .logo {
+    width: 18%;
+}
+.nav-menu > nav > .menu > a,
+.nav-menu > nav > .logo > a {
+    color: #16adfb;
+    font-size: 18px;
+    padding: 10px;
+    display: inline-block;
+    transition: .3s all;
+}
+.nav-menu > nav > .menu > a:hover {
+    background-color: #16adfb;
+    text-decoration: none;
+    color: #fff;
+}
+.logo {
+    text-align: center;
+    background-color: #16adfb;
+}
+.nav-menu > nav > .logo > a{
+    color: #fff;
+    font-style: italic;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+.nav-menu > nav > .logo > a:hover{
+    text-decoration: none;
+}
+.header-cart > strong {
+    color: #16adfb;
+    padding-right: 30px;
+}
+
+.header-cart > strong > span {
+    background-color: #fff;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 1.2;
+}
