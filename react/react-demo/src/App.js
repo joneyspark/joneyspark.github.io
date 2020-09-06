@@ -1,8 +1,29 @@
 import React, { useState, useEffect } from 'react';
-import logo from './logo.svg';
 import './App.css';
 
+import New from './components/news/New';
+import Header from './components/Header/Header';
+import Topheadline from './components/Topheadline/Topheadline';
+import {BrowserRouter as Router,Switch,Route,Link} from "react-router-dom";
+import Button from '@material-ui/core/Button';
+import {
+  LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
+} from 'recharts';
+import About from './components/About/About';
+import Home from './components/Home/Home';
+
+
+
 function App() {
+  const reChartdata = [
+    {name: 'Page A', uv: 4000, pv: 2400, amt: 2400},
+    {name: 'Page B', uv: 3000, pv: 1398, amt: 2210},
+    {name: 'Page C', uv: 2000, pv: 9800, amt: 2290},
+    {name: 'Page D', uv: 2780, pv: 3908, amt: 2000},
+    {name: 'Page E', uv: 1890, pv: 4800, amt: 2181},
+    {name: 'Page F', uv: 2390, pv: 3800, amt: 2500},
+    {name: 'Page G', uv: 3490, pv: 4300, amt: 2100},
+];
 
   var person1 = {
     fname: "Joney",
@@ -25,9 +46,59 @@ function App() {
     {name:"Salmansha",age:62},
   ]
   return (
-    <div className="App">
+    <Router>
+        <ul>
+          <li>
+            <Link to="/">Home</Link>
+          </li>
+          
+          <li>
+            <Link to="/home">Home</Link>
+          </li>
+
+          <li>
+            <Link to="/about">About</Link>
+          </li>
+          <li>
+            <Link to="/">Root</Link>
+          </li>
+        </ul>
+        <Switch>
+          <Route exact path="/">
+            <Home />
+          </Route>
+          
+          <Route path="/home">
+            <Home></Home>
+          </Route>
+
+          <Route path="/about">
+            <About></About>
+          </Route>
+          <Route path="*">
+            <Notfound />
+          </Route>
+        </Switch>
+    <div className="App container">
+          	<LineChart width={600} height={300} data={reChartdata}
+                  margin={{top: 5, right: 30, left: 20, bottom: 5}}>
+            <XAxis dataKey="name"/>
+            <YAxis/>
+            <CartesianGrid strokeDasharray="3 3"/>
+            <Tooltip/>
+            <Legend />
+            <Line type="monotone" dataKey="pv" stroke="#8884d8" activeDot={{r: 8}}/>
+            <Line type="monotone" dataKey="uv" stroke="#82ca9d" />
+            </LineChart>
+      <Header></Header>
+      <Topheadline></Topheadline>
       <header className="App-header">
+      <New></New>
+
         <p>My First React App</p>
+        <Button variant="contained" color="primary">
+          Hello World
+        </Button>
         <div>
           <p><strong>Name:</strong>{person1.fname + " " + person1.lname}</p>
           <p><strong>Position:</strong>{person1.position}</p>
@@ -45,13 +116,20 @@ function App() {
         
         <ul>
           {
-            Heros.map(hero => <li>{hero}</li>)
+            Heros.map(hero => <li key={hero.name}>{hero}</li>)
           }
         </ul>
         <Users />
       </header>
     </div>
+    </Router>
   );
+}
+
+function Notfound(){
+  return(
+    <h1>Not Found</h1>
+  )
 }
 
 function Person(props){
@@ -111,7 +189,7 @@ function Users(){
     .then(res => res.json())
     .then(data => {
       setUsers(data);
-      console.log(data);
+      //console.log(data);
     })
   },[])
 
@@ -119,7 +197,7 @@ function Users(){
     <div>
       <ul>
         {
-          users.map(user => <li>
+          users.map(user => <li key={user.id}>
             <p>Fullname: {user.name}</p>
             <p>Email: {user.email}</p>
             </li>)
@@ -139,4 +217,6 @@ return(
   </div>
 )
 }
+
+
 export default App;

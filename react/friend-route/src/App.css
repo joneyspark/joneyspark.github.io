@@ -1,0 +1,10 @@
+.user-container{
+    display:flex;
+    flex-wrap: wrap;
+}
+.user-box:nth-child(even) {
+    background: lightgreen;
+}
+.user-box:nth-child(odd) {
+    background-color: lightcoral;
+}
