@@ -26,16 +26,27 @@ const useStyles = makeStyles((theme) => ({
 const PostDetail = () => {
     let {postDetail} = useParams();
     const url = `https://jsonplaceholder.typicode.com/posts/${postDetail}`;
-    const [details, setDetails] = useState([]);
+    const [details, setDetails] = useState({});
     useEffect(() => {
         fetch(url)
            .then(res => res.json())
            .then(data => {  
            //setDetails(data => [...data, {"newElm":`${data.id}`}]);
            setDetails(data);
-            console.log(data);
+            //console.log(data);
            });
      }, []);
+
+     let postid = details.id;
+
+     let extraData = [details, {"image":`${postid}.webp`}];
+     let newImg;
+     console.log(extraData);
+     const newDetailImg = extraData.map(img => {
+        newImg = img.image;
+     });
+
+
 
     const getPostId = details.id;
     
@@ -65,6 +76,7 @@ const PostDetail = () => {
             <Grid container spacing={3}>
                 <Grid item xs={8}>
                 <Paper className={classes.paper}>
+                    <img src={process.env.PUBLIC_URL + '/images/blog/' + newImg} />
                     <h1>{details.title}</h1>
                     <Typography gutterBottom variant="h5" component="h2">
                         {details.body}
