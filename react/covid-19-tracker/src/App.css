@@ -1,0 +1,32 @@
+*{
+  margin: 0;
+}
+.App{
+  display: flex;
+  justify-content: center;
+  padding: 20px
+}
+.app__left{
+  flex: 0.9;
+}
+.app__header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+body{
+  background-color: #f5f7fa;
+}
+
+.app__states{
+  display: flex;
+  justify-content:space-between;
+}
+
+@media (max-width: 990px){
+  .App{
+    flex-direction: column;
+  }
+}

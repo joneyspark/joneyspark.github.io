@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
@@ -15,7 +15,27 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function FullWidthGrid() {
+
+
+const About = () => {
+
+  const fakeInfoData = {
+
+    "id": 1,
+    "name": "spark",
+    "country": "BD",
+  }
+  
+  const [fakeinfo, setFakeInfo] = useState({})
+  
+  useEffect(()=>{
+    fakeInfoData.newItem = "new Item Value";
+    setFakeInfo(fakeInfoData);
+  }, [])
+  
+  console.log(fakeinfo);
+
+
   const classes = useStyles();
 
   return (
@@ -40,3 +60,5 @@ export default function FullWidthGrid() {
     </Container>
   );
 }
+
+export default About;

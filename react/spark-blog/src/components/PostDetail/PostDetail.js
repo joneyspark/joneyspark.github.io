@@ -31,11 +31,14 @@ const PostDetail = () => {
         fetch(url)
            .then(res => res.json())
            .then(data => {  
+               data.newElem = `${data.id}.jpg`;
            //setDetails(data => [...data, {"newElm":`${data.id}`}]);
            setDetails(data);
             //console.log(data);
            });
      }, []);
+
+     console.log("New Element", details);
 
      let postid = details.id;
 
