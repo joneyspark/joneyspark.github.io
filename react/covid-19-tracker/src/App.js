@@ -6,6 +6,7 @@ import Map from './component/Map';
 import Table from './component/Table/Table';
 import {sortData}  from './component/Util';
 import LineGraph from './component/LineGraph';
+import "leaflet/dist/leaflet.css";
 
 function App() {
   const proxyurl = "https://cors-anywhere.herokuapp.com/";
@@ -15,6 +16,14 @@ function App() {
   const [country, setCountry] = useState('worldwide');
   const [countryInfo, setCountryInfo] = useState({});
   const [tableData, setTableData] = useState([]);
+  const [mapCountries, setMapCountries] = useState([]);
+
+  const [mapCenter, setMapCenter] = useState({
+    lat: 34.80746,
+    lng: -40.4796
+  });
+
+  const [mapZoom, setMapZoom] = useState(3)
 
   useEffect(() => {
     fetch(proxyurl + allCountriesURL)
@@ -38,6 +47,7 @@ function App() {
           const sortedData = sortData(data);
           setTableData(sortedData);
           setCountries(countires);
+          setMapCountries(data);
       });
 
     };
@@ -58,11 +68,13 @@ function App() {
 
       setCountry(countryCode);
       setCountryInfo(data)
+      setMapCenter([data.countryInfo.lat, data.countryInfo.long]);
+      setMapZoom(4)
     });
 
   };
 
-  console.log("COUNTRY INFO >>>> ", countryInfo);
+  //console.log("COUNTRY INFO >>>> ", countryInfo);
 
   return (
     <div className="App">
@@ -88,7 +100,11 @@ function App() {
           <InfoBox title="Death" total={countryInfo.deaths} cases={countryInfo.todayDeaths}></InfoBox>
         </div>
 
-        <Map></Map>
+        <Map 
+        center = {mapCenter}
+        zoom = {mapZoom}
+        countries = {mapCountries}
+        ></Map>
       </div>
       <Card className="app__right">
         <CardContent>

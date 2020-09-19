@@ -1,0 +1,13 @@
+.button__box{
+    text-align: center;
+}
+.button__box > button {
+    color: #333;
+    font-size: 18px;
+    margin: 30px 5px;
+    padding: 20px 10px;
+}
+.activeBtn{
+    background-color: red !important;
+    border: 1px solid red;
+}

@@ -1,0 +1,24 @@
+.banner__search{
+    text-align: center;
+}
+.banner__search > input {
+    border: 0;
+    width: 65%;
+    padding: 13px 20px;
+    border-radius: 20px;
+}
+.banner__search > button {
+    background: red;
+    border-radius: 20px;
+    padding: 8px 4px;
+    display: inline-block;
+    color: #fff;
+    margin-left: -19px;
+    width: 120px;
+}
+.banner__search > button:hover {
+    background: #ff9e05;
+}
+.banner__search > input:focus {
+    outline: 0;
+}

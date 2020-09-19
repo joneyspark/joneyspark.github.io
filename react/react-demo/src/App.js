@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useReducer } from 'react';
 import './App.css';
 
 import New from './components/news/New';
@@ -45,8 +45,29 @@ function App() {
     {name:"Foridi",age:52},
     {name:"Salmansha",age:62},
   ]
+
+  function reducer(state, action) {
+    switch(action.type){
+      case 'INCREMENT':
+        return {count: state.count + 1 }
+      case 'DECREMENT':
+        return {count: state.count - 1 }
+      default:
+        return state;
+
+    }
+  }
+
+  const initializeState = {count: 0};
+
+  const [state, dispatch] = useReducer(reducer, initializeState);
   return (
     <Router>
+      <h1>Reducer Counter: {state.count}</h1>
+      <button onClick={() => dispatch({type: 'INCREMENT'})}>Increase (+)</button>
+      <button onClick={() => dispatch({type: 'DECREMENT'})}>Decrease (-)</button>
+
+
         <ul>
           <li>
             <Link to="/">Home</Link>
@@ -79,7 +100,10 @@ function App() {
             <Notfound />
           </Route>
         </Switch>
+
     <div className="App container">
+
+
           	<LineChart width={600} height={300} data={reChartdata}
                   margin={{top: 5, right: 30, left: 20, bottom: 5}}>
             <XAxis dataKey="name"/>
