@@ -4,6 +4,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import { useHistory, useLocation, useParams } from 'react-router-dom';
 import Header from '../Header/Header';
 import travelData from '../../TravelData/TravelData';
+import { motion } from "framer-motion";
+import { transitionsPage, transitionVariants } from '../Transitions/Transitions';
 
 const useStyles = makeStyles((theme) => ({
     main__Box:{
@@ -92,11 +94,22 @@ const Booking = () => {
     const getDescription =  getTravelData.map( location => location.desc);
 
     let history = useHistory();
-    const bookingHandle = (getOrigin) => {
-        history.push(`/placebooking?=${getOrigin}`);
+    const bookingHandle = (id) => {
+        history.push(`/placebooking/${id}`);
         console.log(getOrigin);
     }
+    let pageVariants;
+    let pageTransitions;
+    transitionVariants(pageVariants);
+    transitionsPage(pageTransitions);
     return (
+        <motion.div
+            initial='out'
+            animate='in'
+            exit='out'
+            variants={transitionVariants(pageVariants)}
+            transition={transitionsPage(pageTransitions)}
+        >
         <Box component="div" className={classes.main__Box}>
             <Header></Header>
             <Grid container>
@@ -146,7 +159,7 @@ const Booking = () => {
                                     />
                                     </Box>
                                 </Box>
-                                <Button variant="contained" color="primary" onClick={()=>bookingHandle(getOrigin)} className={classes.booking__btn}>
+                                <Button variant="contained" color="primary" onClick={()=>bookingHandle(getId)} className={classes.booking__btn}>
                                     Start Booking
                                 </Button>
 
@@ -157,6 +170,7 @@ const Booking = () => {
                 </Grid>
             </Grid>
         </Box>
+        </motion.div>
     );
 };
 

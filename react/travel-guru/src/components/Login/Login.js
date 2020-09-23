@@ -2,23 +2,12 @@ import { Box, Button, Card, CardContent, Checkbox, Container, FormControlLabel, 
 import React, { useContext, useState } from 'react';
 import Header2 from '../Header/Header2';
 import { makeStyles } from '@material-ui/core/styles';
-import { withStyles } from '@material-ui/core/styles';
-import { green } from '@material-ui/core/colors';
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
-import * as firebase from "firebase/app";
-import "firebase/auth";
 import { UserContext } from '../../App';
 import { useHistory, useLocation } from 'react-router-dom';
-
-const firebaseConfig = {
-    apiKey: "AIzaSyARv2BbZ0C0k_GcSC8N0q7M36WzOB5mSAU",
-    authDomain: "travel-guruji.firebaseapp.com",
-    databaseURL: "https://travel-guruji.firebaseio.com",
-    projectId: "travel-guruji",
-    storageBucket: "travel-guruji.appspot.com",
-    messagingSenderId: "681057747405",
-    appId: "1:681057747405:web:d0919675bae2a0ae85c484"
-  };
+import { motion } from "framer-motion";
+import { transitionsPage, transitionVariants } from '../Transitions/Transitions';
+import { handleGoogleSignIn, handleFacebookSignIn, firebaseInitializeFramework, createUserWithEmailAndPassword, signInWithEmailAndPassword, handleSignOut } from './LoginManager';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -26,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
         flexGrow: 1,
       },
     form__box: {
-        marginTop: '100px',
+        marginTop: '50px',
         border: '1px solid #949494',
         padding:'30px 10px',
     },
@@ -55,29 +44,32 @@ const useStyles = makeStyles((theme) => ({
         marginTop: theme.spacing(2),
         pointer:'cursor',
     },
+    signIn__button:{
+        width: '90%',
+        margin: 'auto',
+        textTransform: 'capitalize',
+        backgroundColor: 'transparent',
+        border: '1px solid #949494',
+        boxShadow: 'none',
+        marginTop: '15px',
+        marginLeft: '5%',
+        '&:hover' : {
+            backgroundColor:'#F9A51A',
+            border:0,
+        }
+    },
 }));
 
-const GreenCheckbox = withStyles({
-    root: {
-      color: green[400],
-      '&$checked': {
-        color: green[600],
-      },
-    },
-    checked: {},
-  })((props) => <Checkbox color="default" {...props} />);
+
 
 const Login = () => {
     const classes = useStyles();
     const [state, setState] = React.useState({
-        checkedA: true,
-        checkedB: true,
-        checkedF: true,
-        checkedG: true,
+        checkedB: false,
       });
     
-      const handleChange = (event) => {
-        setState({ ...state, [event.target.name]: event.target.checked });
+      const handleChange = (e) => {
+        setState({ ...state, [e.target.name]: e.target.checked });
       };
 
       const [loggedInUser, setLoggedInUser] = useContext(UserContext);
@@ -101,59 +93,32 @@ const [user, setUser] = useState({
     isSignedIn: false,
     email: '',
     name:'',
+    lname:'',
     photo:'',
     password:'',
     error:'',
     success: false,
 });
 
+firebaseInitializeFramework();
 
-// Initialize Firebase
-if(firebase.apps.length === 0){
-    firebase.initializeApp(firebaseConfig);
+const googleSignIn = () => {
+    handleGoogleSignIn()
+    .then(res => {
+        setUser(res);
+        setLoggedInUser(res);
+        history.replace(from);
+    })
 }
 
-  const provider = new firebase.auth.GoogleAuthProvider();
-
-  const googleSignIn = () => {
-      firebase.auth().signInWithPopup(provider)
-      .then( res => {
-        const {displayName, email, photoURL} = res.user;
-        console.log(displayName);
-        console.log(email);
-        console.log(photoURL);
-
-        const googleSignedInUser = {
-            isSignedIn: true,
-            name: displayName,
-            email: email,
-            photo: photoURL,
-        }
-
-        setUser(googleSignedInUser);
-        setLoggedInUser(googleSignedInUser);
+const facebookSignIn = () => {
+    handleFacebookSignIn()
+    .then(res => {
+        setUser(res);
+        setLoggedInUser(res);
         history.replace(from);
-      }).catch(error => {
-        var email = error.email;
-      });
-  }
-
-  const googleSignOut = () => {
-    firebase.auth().signOut()
-    .then( (res) => {
-        const signOutUser = {
-            isSignedIn: false,
-            name:'',
-            email:'',
-            photo:'',
-            password:'',
-        }
-        setUser(signOutUser);
-        console.log('Sign-out successful')
-      }).catch((error) => {
-        console.log('An error happened.');
-      });
-  }
+    })
+}
 
 
   const handleInputField = (e) => {
@@ -163,11 +128,12 @@ if(firebase.apps.length === 0){
       let isValidFormField = true;
 
       if( fieldName === 'name'){
-          isValidFormField = fieldValue.length > 2;
+        isValidFormField = fieldValue.length > 2;
+        
       }
       
       if( fieldName === 'lname'){
-          isValidFormField = fieldValue.length > 2;
+        isValidFormField = fieldValue.length > 2;
       }
 
       if ( fieldName === 'email'){
@@ -195,70 +161,50 @@ if(firebase.apps.length === 0){
 
   const handleRegSubmit = (e) => {
       if (user.email && user.password) {
-        firebase.auth().createUserWithEmailAndPassword(user.email, user.password)
-        .then( (res) => {
-            const newUser = {...user};
-            newUser.success = true;
-            newUser.error = '';
-            setUser(newUser);
-            updateProfile(user.name);
+        createUserWithEmailAndPassword(user.name, user.lname, user.email, user.password)
+        .then(res => {
+            setUser(res);
+            setLoggedInUser(res);
             history.replace(from);
-            console.log('Successfully Submit');
         })
-        .catch((error) => {
-            const newUser = {...user};
-            newUser.error = error.message;
-            newUser.success = false;
-            setUser(newUser);
-          });
       }
       e.preventDefault();
   }
 
   const handleLoginSubmit = (e) => {
     if(user.email && user.password) {
-        firebase.auth().signInWithEmailAndPassword(user.email, user.password)
-        .then((res) => {
-            const {displayName, email} = res.user;
-            const passwordSignedInUser = {
-                isSignedIn: true,
-                name: displayName,
-                email: email,
-                success:true,
-                error:'',
-
-            }
-            setUser(passwordSignedInUser);
-            setLoggedInUser(passwordSignedInUser);
+        signInWithEmailAndPassword(user.email, user.password)
+        .then(res =>{
+            setUser(res);
+            setLoggedInUser(res);
             history.replace(from);
-            console.log('Display Name >>>', res.user);
-            
         })
-        .catch((error) => {
-            const newUser = {...user};
-            newUser.error = error.message;
-            newUser.success = false;
-            setUser(newUser);
-          });
     }
     e.preventDefault();
   }
 
-    const updateProfile = (name) => {
-        var user = firebase.auth().currentUser;
-        user.updateProfile({
-        displayName: name,
-        }).then( () =>{
-        console.log('Update successful.')
-        }).catch((error) =>{
-        console.log('An error happened.')
-        });
+    const signOut = () => {
+        handleSignOut()
+        .then(res => {
+            setUser(res);
+            setLoggedInUser(res);
+        })
     }
-
     
+    let pageVariants;
+    let pageTransitions;
+    transitionVariants(pageVariants);
+    transitionsPage(pageTransitions);
 
     return (
-        <Container>
+        <motion.div
+            initial='out'
+            animate='in'
+            exit='out'
+            variants={transitionVariants(pageVariants)}
+            transition={transitionsPage(pageTransitions)}
+        >
+        <Container >
             <Header2></Header2>
             <Grid container spacing={3}>
                 <Grid item xs={3} />
@@ -313,21 +259,35 @@ if(firebase.apps.length === 0){
                             </Card>
                             <br />
                             <hr />
+                            {user.isSignedIn 
+                            ?
                             <Button
                                 variant="contained"
                                 color="default"
-                                className={classes.button}
-                                startIcon={<CloudUploadIcon />}
+                                className={classes.signIn__button}
+                                onClick={signOut}
                             >
-                                Facebook Signup
+                                Facebook SignOut
                             </Button>
+                            :
+                            <Button
+                                variant="contained"
+                                color="default"
+                                className={classes.signIn__button}
+                                onClick={facebookSignIn}
+                            >
+                                <img src={process.env.PUBLIC_URL + '/images/fb.png'} width="30" alt="google login" style={{marginRight: '5%'}} />
+                                Continue with Facebook
+                            </Button>
+                            }
+                            
                             {user.isSignedIn ?
                             <Button
                                 variant="contained"
                                 color="default"
-                                className={classes.button}
+                                className={classes.signIn__button}
                                 startIcon={<CloudUploadIcon />}
-                                onClick={googleSignOut}
+                                onClick={signOut}
                             >
                                 Sign out
                             </Button>
@@ -336,11 +296,11 @@ if(firebase.apps.length === 0){
                             <Button
                                 variant="contained"
                                 color="default"
-                                className={classes.button}
-                                startIcon={<CloudUploadIcon />}
+                                className={classes.signIn__button}
                                 onClick={googleSignIn}
                             >
-                                Goodgle Signin
+                                <img src={process.env.PUBLIC_URL + '/images/google.png'} width="30" alt="google login" style={{marginRight: '5%'}} />
+                                Continue with Goodgle
                             </Button>
                             }
                         </Box>
@@ -375,6 +335,7 @@ if(firebase.apps.length === 0){
                 <Grid item xs={3} />
             </Grid>
         </Container>
+    </motion.div>
     );
 };
 

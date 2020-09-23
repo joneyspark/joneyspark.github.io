@@ -11,26 +11,112 @@ const firebaseConfig = {
     appId: "1:681057747405:web:d0919675bae2a0ae85c484"
   };
 // Initialize Firebase
-  firebase.initializeApp(firebaseConfig);
+  export const firebaseInitializeFramework = ()=> {
+    // Initialize Firebase
+    if(firebase.apps.length === 0){
+      firebase.initializeApp(firebaseConfig);
+    }
+  }
 
-  const provider = new firebase.auth.GoogleAuthProvider();
-  
-  export const googleSignIn = () => {
-    return firebase.auth().signInWithPopup(provider)
-    .then(function(result) {
-        
-        var user = result.user;
-        
-      })
-    .catch(function(error) {
-        // Handle Errors here.
-        var errorCode = error.code;
-        var errorMessage = error.message;
-        // The email of the user's account used.
-        var email = error.email;
-        // The firebase.auth.AuthCredential type that was used.
-        var credential = error.credential;
-        // ...
+  export const handleGoogleSignIn = () => {
+    const provider = new firebase.auth.GoogleAuthProvider();
+      return firebase.auth().signInWithPopup(provider)
+      .then( (res) => {
+        const {displayName, email, photoURL} = res.user;
+        const googleSignedInUser = {
+            isSignedIn: true,
+            name: displayName,
+            email: email,
+            photo: photoURL,
+            success: true,
+        }
+
+        return googleSignedInUser;
+      }).catch(error => {
+        const errorMessage = error.message;
       });
   }
 
+  export const handleSignOut = () => {
+    return firebase.auth().signOut()
+    .then( (res) => {
+        const signOutUser = {
+            isSignedIn: false,
+            name:'',
+            email:'',
+            photo:'',
+            password:'',
+        }
+        return signOutUser;
+      }).catch((error) => {
+        console.log('An error happened.');
+      });
+  }
+
+  export const handleFacebookSignIn = () => {
+    const facebookProvider = new firebase.auth.FacebookAuthProvider();
+    return firebase.auth().signInWithPopup(facebookProvider)
+    .then((res)=> {
+      const {displayName, email, photoURL} = res.user;
+      const facebookSignedInUser = {
+          isSignedIn: true,
+          name: displayName,
+          email: email,
+          photo: photoURL,
+          success: true,
+      }
+  
+      return facebookSignedInUser;
+    }).catch((error)=> {
+      const errorMessage = error.message;
+    });
+  }
+
+  export const createUserWithEmailAndPassword = (name, lname, email, password) => {
+   return firebase.auth().createUserWithEmailAndPassword(email, password)
+        .then( (res) => {
+            const newUser = res.user;
+            newUser.success = true;
+            newUser.error = '';
+            updateProfile(name, lname);
+            console.log("New User>>>", res.user);
+            return newUser;
+        })
+        .catch((error) => {
+            const newUser = {};
+            newUser.error = error.message;
+            newUser.success = false;
+            return newUser;
+          });
+
+  }
+
+  export const signInWithEmailAndPassword = (email, password) => {
+    return firebase.auth().signInWithEmailAndPassword(email, password)
+        .then((res) => {
+          const newUser = res.user;
+          newUser.success = true;
+          newUser.error = '';
+          console.log("Loggined In User>>>", res.user);
+          return newUser;
+        })
+        .catch((error) => {
+            const newUser = {};
+            newUser.error = error.message;
+            newUser.success = false;
+            return newUser;
+          });
+  }
+
+  const updateProfile = (name, lname) => {
+
+    const user = firebase.auth().currentUser;
+
+    user.updateProfile({
+      displayName: name + " " + lname,
+    }).then( () =>{
+    console.log('Update successful.')
+    }).catch((error) =>{
+    console.log('An error happened.')
+    });
+}

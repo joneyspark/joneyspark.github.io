@@ -16,6 +16,8 @@ import MoreIcon from '@material-ui/icons/MoreVert';
 import { Button, Container } from '@material-ui/core';
 import { Link, useHistory } from 'react-router-dom';
 import { UserContext } from '../../App';
+import { handleSignOut } from '../Login/LoginManager';
+import AccountCircleRoundedIcon from '@material-ui/icons/AccountCircleRounded';
 
 const useStyles = makeStyles((theme) => ({
     grow: {
@@ -96,11 +98,14 @@ const useStyles = makeStyles((theme) => ({
     },
   }));
 
-const Header2 = () => {
+
+const Header2 = (props) => {
 const classes = useStyles();
 const [loggedInUser, setLoggedInUser] = useContext(UserContext);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+
+  console.log("Header Loggedin 2 >>>", loggedInUser.displayName);
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -189,13 +194,21 @@ const [loggedInUser, setLoggedInUser] = useContext(UserContext);
     history.push('/login');
   }
 
+  const signOut = () => {
+    handleSignOut()
+    .then(res => {
+        //setUser(res);
+        setLoggedInUser(res);
+    })
+}
+
     return (
     <Container className={classes.grow}>
       <AppBar position="static" className={classes.app__Bar}>
         <Toolbar>
           <Typography className={classes.title} variant="h6" noWrap>
             <Link to='/'>
-              <img src={process.env.PUBLIC_URL + '/images/logo.png'} width="150" alt="logo" />
+              <img src={process.env.PUBLIC_URL + '/images/Logo.png'} width="150" alt="logo2" />
             </Link>
           </Typography>
           <div className={classes.search}>
@@ -231,13 +244,14 @@ const [loggedInUser, setLoggedInUser] = useContext(UserContext);
             </MenuItem>
             {loggedInUser.email && 
               <MenuItem>
-                  <p style={{textTransform: 'capitalize'}}>{loggedInUser.name}</p>
+                  <AccountCircleRoundedIcon width="30" />
+                  <p style={{textTransform: 'capitalize'}}>{loggedInUser.displayName ? loggedInUser.displayName : loggedInUser.name}</p>
               </MenuItem>
             }
             <MenuItem>
             {loggedInUser.email 
                 ?
-                <Button className={classes.login__Button}>Logout</Button>
+                <Button className={classes.login__Button} onClick={signOut}>Logout</Button>
                 :
                 <Button className={classes.login__Button} onClick={goToLogin}>Login</Button>
             }

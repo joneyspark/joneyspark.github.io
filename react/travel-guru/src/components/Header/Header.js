@@ -16,6 +16,8 @@ import MoreIcon from '@material-ui/icons/MoreVert';
 import { Button, Container } from '@material-ui/core';
 import { UserContext } from '../../App';
 import { Link, useHistory } from 'react-router-dom';
+import { handleSignOut } from '../Login/LoginManager';
+import AccountCircleRoundedIcon from '@material-ui/icons/AccountCircleRounded';
 
 const useStyles = makeStyles((theme) => ({
     grow: {
@@ -99,7 +101,7 @@ const Header = () => {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
-
+  console.log("Header Loggedin", loggedInUser);
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
@@ -190,6 +192,13 @@ const Header = () => {
     history.push('/destination');
   }
 
+  const signOut = () => {
+    handleSignOut()
+    .then(res => {
+        //setUser(res);
+        setLoggedInUser(res);
+    })
+}
 
 
     return (
@@ -216,7 +225,7 @@ const Header = () => {
           </div>
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
-            
+
             <MenuItem onClick={goToHome}>
                 <p>Home</p>
             </MenuItem>
@@ -232,15 +241,16 @@ const Header = () => {
             <MenuItem>
                 <p>Contact</p>
             </MenuItem>
-            {loggedInUser.email && 
+            {loggedInUser.email &&
               <MenuItem>
-                  <p style={{textTransform: 'capitalize'}}>{loggedInUser.name}</p>
+                  <AccountCircleRoundedIcon width="30" />
+                  <p style={{textTransform: 'capitalize'}}>{loggedInUser.displayName ? loggedInUser.displayName : loggedInUser.name}</p>
               </MenuItem>
             }
             <MenuItem>
-            {loggedInUser.email 
+            {loggedInUser.email
                 ?
-                <Button className={classes.login__Button}>Logout</Button>
+                <Button className={classes.login__Button} onClick={signOut}>Logout</Button>
                 :
                 <Button className={classes.login__Button} onClick={goToLogin}>Login</Button>
             }

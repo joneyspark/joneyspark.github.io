@@ -1,59 +1,85 @@
-import { Box, Container, Grid, Typography } from '@material-ui/core';
-import React from 'react';
+import { Box, Container, FormHelperText, Grid, MenuItem, Select, Typography } from '@material-ui/core';
+import React, { useEffect, useState } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
 import Header2 from '../Header/Header2';
 import travelData from '../../TravelData/TravelData';
-
-
-function useQuery() {
-    return new URLSearchParams(useLocation().search);
-}
-const PlaceBooking = ({ name }) => {
-    let query = useQuery();
-    console.log("GetQuery Name >>>",query.get(name));
-
+import Hotels from '../Hotels/Hotels';
+import Map from '../Map/Map';
+import './PlaceBooking.css';
+import { motion } from "framer-motion";
+import { transitionsPage, transitionVariants } from '../Transitions/Transitions';
+const PlaceBooking = () => {
     let { placeId } = useParams();
-    console.log("sendingId>>>", placeId);
-    console.log("Query Paramenters>>>", name);
+    const getTravelData = travelData.filter( place => place.id === Number(placeId) );
+    const [hotels, setHotels] = useState([]);
+    const [mapCenter, setMapCenter] = useState({
+        lat:24.883721,
+        lng:91.861839,
+    })
+    const [zoom , setZoom] = useState(8);
 
-    const getTravelData = travelData.filter( place => place.id === placeId )
-    console.log("getAllData >>>", getTravelData);
+    useEffect(()=>{
+        const newTravelData = getTravelData
+        setHotels(newTravelData);
+        const lat = newTravelData.map( mapLocation => mapLocation.lat);
+        const lng = newTravelData.map ( mapLocation => mapLocation.lng);
+        
+        setMapCenter([lat[0], lng[0]]);
+        setZoom(10);
+    }, [])
+
+    const handleOnChangeHotel = (e) => {
+        const getMapValue = e.target.value;
+        setMapCenter([getMapValue[0], getMapValue[1]]);
+        setZoom(12);
+    }
+    let pageVariants;
+    let pageTransitions;
+    transitionVariants(pageVariants);
+    transitionsPage(pageTransitions);
     
     return (
-        <Container>
-            <Header2></Header2>
-            {name}
-            <hr />
-            <Grid container spacing={3}>
-                <Grid item xs={6}>
-                    <Box component='div' display='flex' justifyContent='center'>
-                        <Box component='div' width='45%' p={2}>
-                            <img src={process.env.PUBLIC_URL + '/images/rec-26.png'} alt='hotel-1' style={{maxWidth: '100%'}} />
+        <motion.div
+            initial='out'
+            animate='in'
+            exit='out'
+            variants={transitionVariants(pageVariants)}
+            transition={transitionsPage(pageTransitions)}
+        >
+            <Container>
+                <Header2></Header2>
+
+                <hr />
+                <Grid container spacing={3}>
+                    
+                    <Grid item xs={6}>
+                        <Box component='div' className="hotel__wrap_box">
+                            {
+                                hotels.map(hotel => <Hotels hotel={hotel} key={hotel.id}></Hotels>)
+                            }
                         </Box>
-                        <Box component='div' width='50%' p={2}>
-                            <Typography variant='h6'>
-                                Light bright airy stylish app & safe peachful stays
-                            </Typography>
-
-                            <Typography variant='body1'>
-                                4 guests 2 bedrooms 2 beds 2 baths
-                                Wif Air conditionning Kitchen
-                                Cancellation fexibility available
-                                4.9(20)
-                                $34/night $167 total
-
-                            </Typography>
+                    </Grid>
+                    <Grid item xs={6}>
+                        <Box component='div'>
+                                <Select
+                                labelId="demo-customized-select-label"
+                                id="demo-customized-select"
+                                onChange={handleOnChangeHotel}
+                                className='hotel__select__box'
+                                >
+                                
+                                    { 
+                                        hotels.map(gethotels => gethotels.hotels.map( gethotel => 
+                                        <MenuItem value={[gethotel.lat, gethotel.lng]}>{gethotel.name}</MenuItem>))
+                                    }
+                                </Select>
+                                <FormHelperText><em>Select Hotel Location in Map</em></FormHelperText>
+                            <Map center={mapCenter} zoom={zoom}></Map>
                         </Box>
-
-                    </Box>
+                    </Grid>
                 </Grid>
-                <Grid item xs={6}>
-                    <Box component='div'>
-                        <img src={process.env.PUBLIC_URL + '/images/Sajek.png'} alt=""/>
-                    </Box>
-                </Grid>
-            </Grid>
-        </Container>
+            </Container>
+        </motion.div>
     );
 };
 

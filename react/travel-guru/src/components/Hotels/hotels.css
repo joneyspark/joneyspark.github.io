@@ -1,0 +1,37 @@
+.hote__body__content{
+    color: #444;
+}
+.hotel__badge {
+    background-color: orange;
+    border-radius: 15px;
+    font-size: 13px;
+    display: inline-block;
+    padding: 1px 7px;
+    text-align: center;
+    margin-right: 2px !important;
+}
+.hotel__details {
+    color: #7d7d7d;
+    margin: 15px 0;
+    overflow: hidden;
+    display: inline-block;
+}
+
+.hotel__rating_star {
+    color: orange;
+    border-radius: 50%;
+    padding: 2px;
+    font-weight: bold;
+}
+.rating__number {
+    font-size: 15px;
+    position: relative;
+    display: inline-block;
+    top: -8px;
+    left: 5px;
+}
+.hotel__room_costing {
+    font-size: 14px;
+    position: relative;
+    top: -5px;
+}
