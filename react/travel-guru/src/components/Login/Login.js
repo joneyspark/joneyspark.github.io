@@ -8,6 +8,8 @@ import { useHistory, useLocation } from 'react-router-dom';
 import { motion } from "framer-motion";
 import { transitionsPage, transitionVariants } from '../Transitions/Transitions';
 import { handleGoogleSignIn, handleFacebookSignIn, firebaseInitializeFramework, createUserWithEmailAndPassword, signInWithEmailAndPassword, handleSignOut } from './LoginManager';
+import { toast, ToastContainer } from 'react-toastify';
+
 
 
 const useStyles = makeStyles((theme) => ({
@@ -64,6 +66,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Login = () => {
     const classes = useStyles();
+    
     const [state, setState] = React.useState({
         checkedB: false,
       });
@@ -107,6 +110,9 @@ const googleSignIn = () => {
     .then(res => {
         setUser(res);
         setLoggedInUser(res);
+        toast.success("Logged in Successfully !", {
+            position: toast.POSITION.TOP_LEFT
+        });
         history.replace(from);
     })
 }
@@ -116,6 +122,9 @@ const facebookSignIn = () => {
     .then(res => {
         setUser(res);
         setLoggedInUser(res);
+        toast.success("Logged in Successfully !", {
+            position: toast.POSITION.TOP_LEFT
+        });
         history.replace(from);
     })
 }
@@ -165,20 +174,39 @@ const facebookSignIn = () => {
         .then(res => {
             setUser(res);
             setLoggedInUser(res);
+            toast.success("Registration Successfully Done !", {
+                position: toast.POSITION.TOP_LEFT
+            });
             history.replace(from);
         })
+      }else{
+        toast.error("Fields are Required !", {
+            position: toast.POSITION.TOP_LEFT
+          });
       }
       e.preventDefault();
   }
 
   const handleLoginSubmit = (e) => {
+
     if(user.email && user.password) {
         signInWithEmailAndPassword(user.email, user.password)
         .then(res =>{
             setUser(res);
             setLoggedInUser(res);
+            toast.success("Logged in Successfully !", {
+                position: toast.POSITION.TOP_LEFT
+            });
             history.replace(from);
+        }).catch(error => {
+            toast.error("Error Notification !", {
+                position: toast.POSITION.TOP_LEFT
+              });
         })
+    }else{
+        toast.error("Fields are Required !", {
+            position: toast.POSITION.TOP_LEFT
+          });
     }
     e.preventDefault();
   }
@@ -188,6 +216,9 @@ const facebookSignIn = () => {
         .then(res => {
             setUser(res);
             setLoggedInUser(res);
+            toast.info("Logged Out !", {
+                position: toast.POSITION.TOP_LEFT
+            });
         })
     }
     
@@ -195,6 +226,7 @@ const facebookSignIn = () => {
     let pageTransitions;
     transitionVariants(pageVariants);
     transitionsPage(pageTransitions);
+
 
     return (
         <motion.div
@@ -204,8 +236,11 @@ const facebookSignIn = () => {
             variants={transitionVariants(pageVariants)}
             transition={transitionsPage(pageTransitions)}
         >
+            
         <Container >
             <Header2></Header2>
+            
+            
             <Grid container spacing={3}>
                 <Grid item xs={3} />
                     <Grid item xs={6}>
@@ -216,9 +251,10 @@ const facebookSignIn = () => {
                                 <Typography variant="h4" component="h2" style={{margin:'15px'}}>
                                     Login
                                 </Typography>
+                                
                                 <form className={classes.root} noValidate autoComplete="off" onSubmit={handleLoginSubmit}>
-                                    <TextField id="email" type="email" onBlur={handleInputField} name="email" label="Email" className={classes.input__box__style} />
-                                    <TextField id="password" type="password" label="Password" onBlur={handleInputField} name="password" className={classes.input__box__style}  />
+                                    <TextField id="email" type="email" onBlur={handleInputField} required name="email" label="Email" className={classes.input__box__style} />
+                                    <TextField id="password" type="password" required label="Password" onBlur={handleInputField} name="password" className={classes.input__box__style}  />
                                     <Box component='div' display='flex' justifyContent='center' alignItems='center'>
                                         <Box className={classes.remember__and__forgot}>
                                             <FormGroup row>

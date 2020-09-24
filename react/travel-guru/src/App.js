@@ -12,8 +12,10 @@ import Destination from './components/Destination/Destination';
 import "leaflet/dist/leaflet.css";
 // import 'swiper/swiper.scss';
 import 'swiper/swiper-bundle.css';
+import 'react-toastify/dist/ReactToastify.css';
 
 import { AnimatePresence, motion} from 'framer-motion';
+import { ToastContainer } from 'react-toastify';
 
 export const UserContext = createContext();
 
@@ -28,6 +30,7 @@ function App() {
       
       
         <AnimatePresence exitBeforeEnter initial={false}>
+        <ToastContainer />
           <Switch location={location}>
             <Route exact path="/">
               <LocationItems></LocationItems>

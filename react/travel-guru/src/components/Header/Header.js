@@ -18,6 +18,7 @@ import { UserContext } from '../../App';
 import { Link, useHistory } from 'react-router-dom';
 import { handleSignOut } from '../Login/LoginManager';
 import AccountCircleRoundedIcon from '@material-ui/icons/AccountCircleRounded';
+import { toast } from 'react-toastify';
 
 const useStyles = makeStyles((theme) => ({
     grow: {
@@ -197,6 +198,9 @@ const Header = () => {
     .then(res => {
         //setUser(res);
         setLoggedInUser(res);
+        toast.info("Logged Out !", {
+          position: toast.POSITION.TOP_LEFT
+      });
     })
 }
 
