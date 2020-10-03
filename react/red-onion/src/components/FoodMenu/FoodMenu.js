@@ -25,9 +25,9 @@ const FoodMenu = () => {
     return (
         <Container>
             <Box className="button__box">
-                <Button color="primary" className={ activeBtn ? 'activeBtn' : '' } onClick={()=>getFoods('breakfast')} >Breakfast</Button>
-                <Button color="primary" className={ activeBtn ? 'activeBtn' : '' } onClick={()=>getFoods('lunch')} >Lunch</Button>
-                <Button color="primary" className={ activeBtn ? 'activeBtn' : '' } onClick={()=>getFoods('dinner')} >Dinner</Button>
+                <Button color="primary"  onClick={()=>getFoods('breakfast')} >Breakfast</Button>
+                <Button color="primary"  onClick={()=>getFoods('lunch')} >Lunch</Button>
+                <Button color="primary"  onClick={()=>getFoods('dinner')} >Dinner</Button>
             </Box>
             <Grid container spacing={3}>
                 {
