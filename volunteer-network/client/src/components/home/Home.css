@@ -1,0 +1,4 @@
+.home_bg{
+    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.90)),url('/images/bg.jpg');
+    background-repeat: no-repeat;
+}

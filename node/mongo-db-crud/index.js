@@ -2,9 +2,10 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const MongoClient = require('mongodb').MongoClient;
 const ObjectId = require('mongodb').ObjectId;
+require('dotenv').config()
 
 const password = 'LjS53HkXVfBXnqw';
-const uri = "mongodb+srv://dbUser:LjS53HkXVfBXnqw@cluster0.po85n.mongodb.net/firstMongoDb?retryWrites=true&w=majority";
+const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.po85n.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`;
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
 const app = express();
@@ -13,7 +14,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 
 client.connect(err => {
-  const collection = client.db("firstMongoDb").collection("firstMongoCollection");
+  const collection = client.db(process.env.DB_NAME).collection("firstMongoCollection");
   app.post("/addProduct", (req, res) => {
       const product = req.body;
       collection.insertOne(product);
