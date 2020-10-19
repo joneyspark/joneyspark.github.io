@@ -29,12 +29,21 @@ export const handelGoogleSignIn = () => {
           email: email,
           success: true,
         }
+        setUserToken();
         return signedInUser;
     })
     .catch(error => {
         console.log(error);
         console.log(error.message);
     })
+}
+
+const setUserToken = () => {
+  firebase.auth().currentUser.getIdToken(/* forceRefresh */ true).then(function(idToken) {
+    sessionStorage.setItem('token', idToken);
+  }).catch(function(error) {
+    // Handle error
+  });
 }
 
 export const handelSignOut = () => {

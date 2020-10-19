@@ -1,0 +1,22 @@
+.contat-us{
+    position: relative;
+    background-image: url('/images/appointme-bg.png');
+    background-position: right;
+    background-size: cover;
+    height: auto;
+    background-repeat: no-repeat;
+    margin-top: 100px;
+    padding: 80px 0;
+
+}
+.contat-us::before{
+    position: absolute;
+    content: ' ';
+    height: 100%;
+    width: 100%;
+    right: 0;
+    background-color: rgb(36, 41, 73);
+    top: 0;
+    opacity: .9;
+
+}

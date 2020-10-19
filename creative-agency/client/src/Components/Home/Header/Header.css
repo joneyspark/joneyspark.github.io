@@ -1,0 +1,17 @@
+.header{
+    background-color: #FBD062;
+    height: 500px;
+    position: relative;
+}
+.header::after {
+    position: absolute;
+    content: ' ';
+    background-color: #fbd062;
+    height: 77%;
+    width: 100%;
+    left: 0;
+    transform: skew(0,-5deg);
+    bottom: 0;
+    transform-origin: 99% 100%;
+    z-index: -1;
+}

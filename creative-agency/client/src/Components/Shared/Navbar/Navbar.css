@@ -1,0 +1,28 @@
+.custom-nav li {
+    margin-left: 15px;
+}
+.custom-nav li a{
+    color: #333;
+}
+ul.custom-nav li.nav-item {
+    position: relative;
+}
+ul.custom-nav li.nav-item.active:after {
+    position: absolute;
+    content: '';
+    width: 85%;
+    background-color: #7AB259;
+    height: 2px;
+    bottom: 7px;
+    left: 6%;
+}
+.custom-nav li a.login-btn {
+    background-color: #111430;
+    color: #fff !important;
+    padding: 7px 40px !important;
+    display: inline-block;
+    border-radius: 5px;
+}
+ul.navbar-nav.ml-auto.custom-nav a.nav-link {
+    color: #333;
+}

@@ -1,0 +1,24 @@
+.makeappointment-section{
+    position: relative;
+    background-image: url('/images/appointme-bg.png');
+    background-position: right;
+    background-size: contain;
+    height: 400px;
+    background-repeat: no-repeat;
+    margin-top: 150px;
+
+}
+.makeappointment-section::before{
+    position: absolute;
+    content: ' ';
+    height: 100%;
+    width: 100%;
+    right: 0;
+    background-color: rgb(36, 41, 73);
+    top: 0;
+    opacity: .9;
+
+}
+.appointment-img img{
+    transform: translateY(-140px);
+}

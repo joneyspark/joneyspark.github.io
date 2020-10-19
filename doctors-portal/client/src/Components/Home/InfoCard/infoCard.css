@@ -1,0 +1,16 @@
+.info-primary {
+    background-color: #00c2d8;
+    color: #fff;
+}
+.info-dark {
+    background-color: #3a4256;
+    color: #fff;
+}
+
+.info-container{
+    height: 120px;
+}
+.info-icon svg {
+    font-size: 4em;
+    margin-right: 30px;
+}

@@ -1,0 +1,22 @@
+.col-md-12.custom-table {
+    background-color: #fff;
+    border-radius: 15px;
+    padding: 20px;
+}
+table thead tr th:first-child {
+    background-color: #f4f7fc;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+table thead tr th:last-child {
+    background-color: #f4f7fc;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+table thead tr th{
+    background-color: #f4f7fc;
+    font-weight: 400;
+    font-size: 14px;
+    color: #949494;
+}

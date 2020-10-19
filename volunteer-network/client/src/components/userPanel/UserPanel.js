@@ -87,10 +87,8 @@ const UserPanel = () => {
                             </CardActions>
                         </Card>
                     </Grid>
-                    
+
                     )
-                
-                    
 
                 }
                 </Grid>

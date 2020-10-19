@@ -39,12 +39,12 @@ client.connect(err => {
       })
   })
 
-  app.get('/getProduct', (req, res) => {
+ /*  app.get('/getProduct', (req, res) => {
       productsCollection.find({})
       .toArray((err, documents)=>{
           res.send(documents);
       })
-  })
+  }) */
 
   
   app.get('/product/:key', (req, res) => {
@@ -62,6 +62,15 @@ client.connect(err => {
     })
 })
 
+app.get('/getProduct', (req, res) => {
+    const search = req.query.search;
+    console.log(search);
+    productsCollection.find({name: {$regex: search}})
+    .toArray((err, documents) => {
+        res.send(documents);
+    })
+})
+
 app.post('/addOrder', (req, res) => {
     const order = req.body;
     ordersCollection.insertOne(order)
@@ -69,6 +78,8 @@ app.post('/addOrder', (req, res) => {
         res.send(result.insertedCount > 0);
     })
 })
+
+
 
 
   console.log("Database ema-jhon Connected Successfully")

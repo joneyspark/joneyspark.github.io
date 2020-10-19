@@ -1,0 +1,22 @@
+.card.orderlist-card {
+    border-radius: 10px;
+    padding: 10px;
+    border: 0;
+    box-shadow: 0px 3px 10px 0 #ececec;
+}
+.card.orderlist-card h5 {
+    padding-top: 15px;
+}
+.card.orderlist-card p {
+    color: #666;
+}
+.card.orderlist-card button.pending {
+    background-color: #fb63634f;
+    border: none;
+    color: #f00;
+}
+.card.orderlist-card button.done {
+    background-color: #fb63634f;
+    border: none;
+    color: green;
+}

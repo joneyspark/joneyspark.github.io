@@ -1,0 +1,10 @@
+.quote-icon {
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+.quote-icon svg {
+    font-size: 14em;
+    color: #10cfde;
+    opacity: .2;
+}

@@ -17,7 +17,7 @@ import AdminLogin from './components/adminLogin/AdminLogin';
 import AdminRoute from './components/adminRoute/AdminRoute';
 
 export const UserContext = createContext();
-export const API_URL = 'http://localhost:4000';
+export const API_URL = 'https://still-coast-29445.herokuapp.com';
 function App() {
   const [adminLoggedin, setAdminLoggedIn] = useState({});
   const [loggedInUser, setLoggedInUser] = useState({});

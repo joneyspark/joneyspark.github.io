@@ -4,19 +4,23 @@ import Product from '../Products/Product';
 import Cart from '../Cart/Cart';
 import { addToDatabaseCart, getDatabaseCart } from '../../utilities/databaseManager';
 import { Link } from 'react-router-dom';
+import { FormControl } from 'react-bootstrap';
 const Shop = () => {
     // const first10 = fakeData.slice(0, 10);
     const [products, setProducts] = useState([]);
     //console.log(fakeData);
     const [cart, setCart] = useState([]);
+    const [search, setSearch] = useState('');
+    document.title = "Shop More";
 
     useEffect(()=>{
-        fetch('http://localhost:4000/getProduct')
+        fetch('http://localhost:4000/getProduct?search='+search)
         .then(res => res.json())
         .then(data => {
+            console.log(data);
             setProducts(data);
         })
-    }, []);
+    }, [search]);
 
     useEffect(()=>{
         const saveCart = getDatabaseCart();
@@ -52,11 +56,18 @@ const Shop = () => {
         addToDatabaseCart(product.key, count);
     }
 
+    const handleSearch = (event) => {
+        setSearch(event.target.value);
+    }
+
     return (
         <div className="shop-container">
             <div className="product-container">
+                
+                    <input type="text" onBlur={handleSearch} />
+                
                 {
-                    products.map(product => <Product handleAddProduct = {handleAddProduct} product={product} shoAddToCartBtn={true} key={product.key}></Product>)
+                    products.map(product => <Product handleAddProduct = {handleAddProduct} product={product} shoAddToCartBtn={true} key={product.id}></Product>)
                 }
             </div>
             <div className="cart-container">

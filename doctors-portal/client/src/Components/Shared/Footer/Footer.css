@@ -1,0 +1,26 @@
+.footer-link strong {
+    color: #10cfe2;
+    font-size: 1.4em;
+}
+.footer-link ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.footer-link ul li a {
+    color: #333;
+    line-height: 2;
+}
+.footer-link ul {
+    margin-top: 15px;
+}
+.footer-link h5 {
+    font-size: 1em;
+    color: #3a4256;
+    margin-top: 20px;
+}
+.footer-link b {
+    display: block;
+    color: #3a4256;
+    margin-top: 15px;
+}
