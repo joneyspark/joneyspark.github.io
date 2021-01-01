@@ -6,6 +6,8 @@ import { Link } from 'react-router-dom';
 const Sidebar = () => {
 
     const [users, setUsers] = useState([]);
+    const [loading, setLoading] = useState(true);
+
     useEffect(()=>{
         fetch(API_URL + `/getAdmin?email=${sessionStorage.getItem('email')}`, {
             method: 'GET',
@@ -16,8 +18,8 @@ const Sidebar = () => {
         })
         .then(res => res.json())
         .then(result => {
-            console.log(result);
             setUsers(result[0]);
+            setLoading(false);
         })
     }, []);
 
@@ -25,11 +27,19 @@ const Sidebar = () => {
 
     return (
         <div>
-            <img width="150" className="img-fluid pb-3 mt-3" src={process.env.PUBLIC_URL + '/images/logos/logo.png'} alt="" />
+            <Link to="/">
+                <img width="150" className="img-fluid pb-3 mt-3" src={process.env.PUBLIC_URL + '/images/logos/logo.png'} alt="" />
+            </Link>
 
-            {
+            {   loading === true ? 
+                <div className="d-flex justify-content-center w-100">
+                    <div className="spinner-border text-center text-info" role="status">
+                    <span className="sr-only">Loading...</span>
+                    </div>
+                </div> 
+                :
                 users &&
-                users.role === 'Admin' ? 
+                users.role === 'Admin' ?
                 <ul className="nav flex-column custom-nav">
                     <li className="nav-item">
                     <Link className="nav-link active" to="/dashboard/admin/adminServiceLists"><FontAwesomeIcon icon={faShoppingCart} /> Service List</Link>

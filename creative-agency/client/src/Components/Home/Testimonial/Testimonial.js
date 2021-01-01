@@ -5,6 +5,7 @@ import { API_URL } from '../../../App';
 const Testimonial = () => {
 
     const [testimonials, setTestimonials] = useState([]);
+    const [loading, setLoading] = useState(true);
 
     useEffect(()=>{
         fetch(API_URL + '/getReviews', {
@@ -13,6 +14,7 @@ const Testimonial = () => {
         .then(res => res.json())
         .then(result => {
             setTestimonials(result);
+            setLoading(false)
         })
     }, []);
 
@@ -23,6 +25,13 @@ const Testimonial = () => {
             <div className="container">
                 <div className="row d-flex align-items-center">
                     {
+                        loading === true ? 
+                        <div className="d-flex justify-content-center w-100">
+                            <div className="spinner-border text-center text-info" role="status">
+                            <span className="sr-only">Loading...</span>
+                            </div>
+                        </div>
+                        :
                         testimonials.map(testimonial => 
                             <div className="col-md-4" key={testimonial._id}>
                                 <div className="testimonial-box shadow-sm p-3 mb-5">

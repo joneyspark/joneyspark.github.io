@@ -76,7 +76,7 @@ const Login = () => {
                     </div>
                         <div className="card text-center " style={{padding: '100px 0'}}>
                             <h4>Login With</h4>
-                            <button className="btn btn-default" style={{border: '1px solid #ddd', borderRadius: '16px', margin:'15px 75px'}} onClick={handelGoogleSignIn}>Continue with Google</button>
+                            <button className="btn btn-default" style={{border: '1px solid #ddd', borderRadius: '16px', margin:'15px 75px', position:'relative'}} onClick={handelGoogleSignIn}> <img src={process.env.PUBLIC_URL + 'images/icons/google.png'} alt="" width="30" style={{position: 'absolute', left: '3px', top: '3px'}} /> Continue with Google</button>
                             <p>Don't have an account? <a href="#">Create an account</a></p>
                         </div>
                     </div>

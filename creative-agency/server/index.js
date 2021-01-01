@@ -18,7 +18,7 @@ const admin = require('firebase-admin');
 const serviceAccount = require('./config/creative-agencyyy-firebase-adminsdk-kmooa-0173371ada.json');
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
-  databaseURL: "https://creative-agencyyy.firebaseio.com"
+  databaseURL: process.env.FIRE_URL
 });
 
 const MongoClient = require('mongodb').MongoClient;
@@ -41,17 +41,16 @@ client.connect(err => {
       const price = req.body.price;
       const status = 0;
 
-      console.log(name, email, service, projectdetails, price);
+      // const filePath = `${__dirname}/doctors/${file.name}`;
 
-      const filePath = `${__dirname}/doctors/${file.name}`;
-
-      file.mv(filePath, err => {
+     /*  file.mv(filePath, err => {
           if (err) {
               console.log(err);
               return res.status(500).send({msg:'Failed to upload'});
-          }
+          } */
 
-          const newImg = fs.readFileSync(filePath);
+          // const newImg = fs.readFileSync(filePath);
+          const newImg = req.files.file.data;
 
           const encImg = newImg.toString('base64');
           
@@ -63,16 +62,16 @@ client.connect(err => {
 
           Orderscollection.insertOne({name, email, service, projectdetails, price, image, status})
           .then(result => {
-            fs.remove(filePath, error => {
-              if(error){
-                console.log(error);
-              }
+            // fs.remove(filePath, error => {
+            //   if(error){
+            //     console.log(error);
+            //   }
               res.send(result.insertedCount > 0)
-            })
+            // })
           })
 
 
-        })
+        // })
     // return res.send({name: file.name, path: `/${file.name}`})
     
   })
@@ -85,15 +84,16 @@ client.connect(err => {
 
       console.log(service, serviceDetail);
 
-      const filePath = `${__dirname}/doctors/${file.name}`;
+      // const filePath = `${__dirname}/doctors/${file.name}`;
 
-      file.mv(filePath, err => {
-          if (err) {
-              console.log(err);
-              return res.status(500).send({msg:'Failed to upload'});
-          }
+      // file.mv(filePath, err => {
+      //     if (err) {
+      //         console.log(err);
+      //         return res.status(500).send({msg:'Failed to upload'});
+      //     }
 
-          const newImg = fs.readFileSync(filePath);
+          // const newImg = fs.readFileSync(filePath);
+          const newImg = req.files.file.data;
 
           const encImg = newImg.toString('base64');
           
@@ -105,16 +105,16 @@ client.connect(err => {
 
           ServicesCollection.insertOne({service, serviceDetail, image})
           .then(result => {
-            fs.remove(filePath, error => {
-              if(error){
-                console.log(error);
-              }
+            // fs.remove(filePath, error => {
+            //   if(error){
+            //     console.log(error);
+            //   }
               res.send(result.insertedCount > 0)
             })
-          })
+          // })
 
 
-        })
+        // })
     // return res.send({name: file.name, path: `/${file.name}`})
     
   });
@@ -127,15 +127,16 @@ client.connect(err => {
       const reivewDesc = req.body.reivewDesc;
       const email = req.body.email;
 
-      const filePath = `${__dirname}/doctors/${file.name}`;
+      // const filePath = `${__dirname}/doctors/${file.name}`;
 
-      file.mv(filePath, err => {
-          if (err) {
-              console.log(err);
-              return res.status(500).send({msg:'Failed to upload'});
-          }
+      // file.mv(filePath, err => {
+      //     if (err) {
+      //         console.log(err);
+      //         return res.status(500).send({msg:'Failed to upload'});
+      //     }
 
-          const newImg = fs.readFileSync(filePath);
+          // const newImg = fs.readFileSync(filePath);
+          const newImg = req.files.file.data;
 
           const encImg = newImg.toString('base64');
           
@@ -147,14 +148,14 @@ client.connect(err => {
 
           ReviewCollection.insertOne({clientName, designation, reivewDesc, email, image})
           .then(result => {
-            fs.remove(filePath, error => {
-              if(error){
-                console.log(error);
-              }
+            // fs.remove(filePath, error => {
+            //   if(error){
+            //     console.log(error);
+            //   }
               res.send(result.insertedCount > 0)
-            })
+            // })
           })
-        })
+        // })
     // return res.send({name: file.name, path: `/${file.name}`})
     
   });
@@ -253,4 +254,4 @@ app.get('/', (req, res)=>{
     res.send("Hello World");
 })
 
-app.listen(process.env.PORT, ()=>console.log("Port is Listening 4000"));
+app.listen(process.env.PORT || 4000, ()=>console.log("Port is Listening 4000"));

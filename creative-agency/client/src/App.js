@@ -13,7 +13,7 @@ import 'react-notifications/lib/notifications.css';
 import Review from './Components/Dashboard/Review/Review';
 import ServiceList from './Components/Dashboard/ServiceList/ServiceList';
 import AdminServiceList from './Components/Dashboard/Admin/AdminServiceList/AdminServiceList';
-export const API_URL = 'http://localhost:4000';
+export const API_URL = 'https://fathomless-basin-23164.herokuapp.com';
 export const UserContext = createContext();
 
 function App() {

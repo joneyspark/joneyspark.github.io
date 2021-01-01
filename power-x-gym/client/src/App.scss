@@ -1,0 +1,87 @@
+$primary-color: #fcd842;
+$secondary-color: #fcca42;
+$white-color: #fff;
+$black-color: #000;
+
+//Navigation Style
+nav{
+  z-index: 99999;
+
+  a{
+    color: #fff !important;
+    padding-right: 1.8rem !important;
+  }
+  #navSpan{
+    color: $primary-color;
+  }
+}
+
+//Banner Style
+.banner{
+  /*  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.90)), url('./logo192.png'); */
+   background-position: 100% 5%;
+   background-repeat: no-repeat;
+   background-size: cover;
+   height: 700px;
+   width: 100%;
+   position: absolute;
+   top: 0;
+   left: 0;
+
+   .banner-content{
+     color: $white-color;
+
+     h1 {
+      font-size: 3.6em;
+      font-weight: 700;
+    }
+
+   }
+   
+  
+
+    svg.svg-inline--fa.fa-play-circle {
+      font-size: 5em;
+      color: #fff;
+      position: absolute;
+      right: 33%;
+      top: 27%;
+      cursor: pointer;
+      z-index: 12;
+    }
+   
+
+   .video-icon::after {
+    transform: rotate(-45deg);
+  }
+  .video-icon::before {
+      transform: rotate(45deg);
+  }
+  .video-icon::before, .video-icon::after {
+      position: absolute;
+      content: '';
+      background-color: #fbfbfb26;
+      width: 80%;
+      height: 150px;
+      right: 0;
+      top: 15%;
+  }
+
+
+}
+
+button.common-btn{
+    background-color: $primary-color;
+    border: 0;
+    color: #333;
+    font-weight: 600;
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    border-radius: 0;
+    padding: 7px 30px;
+}
+
+button.common-btn:hover{
+  background-color: $white-color;
+  color: $black-color; 
+}

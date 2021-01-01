@@ -1,0 +1,11 @@
+.banner{
+    /* background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.90)),url('/images/banner-1.jpg'); */
+    background-position: top;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 700px;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}

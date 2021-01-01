@@ -21,6 +21,8 @@ const Order = () => {
     const { register, handleSubmit, errors } = useForm();
     const [orderInfo, setOrderInfo] = useState({});
     const [file, setFile ] = useState(null);
+    const [loading, setLoading] = useState(true);
+
 
     let history = useHistory();
 
@@ -44,6 +46,7 @@ const Order = () => {
         .then(res => res.json())
         .then(result => {
             setServices(result);
+            setLoading(false);
         })
     }, []);
 
@@ -119,41 +122,50 @@ const Order = () => {
                             </div>
                         </div>
                         <div className="col-md-6 pb-5 mt-3">
-                            <form onSubmit={handleSubmit(onSubmit)} className="order-form">
-
-                                <input name="name" onBlur={handleBlur} ref={register({ required: true })} defaultValue={getServiceName} placeholder="Your Name/Company Name" className="form-control" />
-                                <small className="error">{errors.name && <span>This field is required</span>}</small>
-
-                                <input name="email" type="email" onBlur={handleBlur} ref={register({ required: true })} defaultValue={sessionStorage.getItem('email')}placeholder="Your Email Address" className="form-control" />
-                                <small className="error">{errors.email && <span>This field is required</span>}</small>
-
-                                <select name="serviceName" ref={register({ required: true })} onChange={handleServiceSelect} value={selectedValue} className="form-control-custom">
-                                    <option value=""> Select a Service </option>
-                                    {
-                                        services.map(service => 
-                                            <option value={service._id} key={service._id}>{service.service}</option>
-                                            )
-                                    }
-                                </select>
-                                <small className="error">{errors.service && <span>This field is required</span>}</small>
-
-                                    
-                                <input name="projectdetails" ref={register({ required: true })} onBlur={handleBlur} placeholder="Project Details" defaultValue={getService} className="form-control" />
-                                <small className="error">{errors.projectdetails && <span>This field is required</span>}</small>
-
-                                <div className="row">
-                                    <div className="col-md-6">
-                                        <input name="price" ref={register({ required: true })} onBlur={handleBlur} placeholder="Price" className="form-control" />
-                                        <small className="error">{errors.price && <span>This field is required</span>}</small>
+                            {
+                                loading === true ? 
+                                <div className="d-flex justify-content-center w-100">
+                                    <div className="spinner-border text-center text-info" role="status">
+                                    <span className="sr-only">Loading...</span>
                                     </div>
-                                    <div className="col-md-6">
-                                        <input name="file" ref={register({ required: true })} onBlur={handleFileChange} className="form-control" type="file" />
-                                        <small className="error">{errors.file && <span>This field is required</span>}</small>
-                                    </div>
-                                </div>
+                                </div> 
+                                :
+                                <form onSubmit={handleSubmit(onSubmit)} className="order-form">
 
-                                <button className="btn btn-primary common-btn form-control" style={commonBtn} type="submit">Submit</button>
-                            </form>
+                                    <input name="name" onBlur={handleBlur} ref={register({ required: true })} defaultValue={getServiceName} placeholder="Your Name/Company Name" className="form-control" />
+                                    <small className="error">{errors.name && <span>This field is required</span>}</small>
+
+                                    <input name="email" type="email" onBlur={handleBlur} ref={register({ required: true })} defaultValue={sessionStorage.getItem('email')}placeholder="Your Email Address" className="form-control" />
+                                    <small className="error">{errors.email && <span>This field is required</span>}</small>
+
+                                    <select name="serviceName" ref={register({ required: true })} onChange={handleServiceSelect} value={selectedValue} className="form-control-custom">
+                                        <option value=""> Select a Service </option>
+                                        {
+                                            services.map(service => 
+                                                <option value={service._id} key={service._id}>{service.service}</option>
+                                                )
+                                        }
+                                    </select>
+                                    <small className="error">{errors.service && <span>This field is required</span>}</small>
+
+                                        
+                                    <input name="projectdetails" ref={register({ required: true })} onBlur={handleBlur} placeholder="Project Details" defaultValue={getService} className="form-control" />
+                                    <small className="error">{errors.projectdetails && <span>This field is required</span>}</small>
+
+                                    <div className="row">
+                                        <div className="col-md-6">
+                                            <input name="price" ref={register({ required: true })} onBlur={handleBlur} placeholder="Price" className="form-control" />
+                                            <small className="error">{errors.price && <span>This field is required</span>}</small>
+                                        </div>
+                                        <div className="col-md-6">
+                                            <input name="file" ref={register({ required: true })} onBlur={handleFileChange} className="form-control" type="file" />
+                                            <small className="error">{errors.file && <span>This field is required</span>}</small>
+                                        </div>
+                                    </div>
+
+                                    <button className="btn btn-primary common-btn form-control" style={commonBtn} type="submit">Submit</button>
+                                </form>
+                            }
                         </div>
                     </div>
                 </div>

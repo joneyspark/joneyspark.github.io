@@ -1,5 +1,6 @@
 .service-box{
     padding: 30px;
+    cursor: pointer;
 }
 .service-box:hover {
     box-shadow: 5px 5px 15px 5px #f3f3f3;

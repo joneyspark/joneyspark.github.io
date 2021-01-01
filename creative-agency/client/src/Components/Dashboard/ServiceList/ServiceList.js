@@ -6,6 +6,8 @@ import './ServiceList.css';
 const ServiceList = () => {
     const[loggedInUser] = useContext(UserContext);
     const [userOrder, setUserOrder] = useState([]);
+    const [loading, setLoading] = useState(true);
+
     useEffect(()=>{
         fetch(API_URL + `/orderlists?email=${sessionStorage.getItem('email')}`, {
             method: 'GET',
@@ -16,8 +18,8 @@ const ServiceList = () => {
         })
         .then(res => res.json())
         .then(result => {
-            console.log(result);
             setUserOrder(result);
+            setLoading(false);
         })
     }, []);
 
@@ -40,6 +42,13 @@ const ServiceList = () => {
                                 </div>
                             <div className="row mt-5 ml-3">
                         {
+                            loading === true ? 
+                            <div className="d-flex justify-content-center w-100">
+                                <div className="spinner-border text-center text-info" role="status">
+                                <span className="sr-only">Loading...</span>
+                                </div>
+                            </div> 
+                            :
                             userOrder.map( orderlist => 
                                 <div className="col-md-5 col-xs-12 mb-3" key={orderlist._id}>
                                     <div className="card orderlist-card">
@@ -49,7 +58,7 @@ const ServiceList = () => {
                                                     <img src={`data:image/png;base64,${orderlist.image.img}`} alt="" width="80" />
                                                 </div>
                                                 <div>
-                                                    <button className="btn btn-primary">Pending</button>
+                                                    <button className="btn btn-primary done">Done</button>
                                                 </div>
                                             </div>
                                             <h5>{orderlist.name}</h5>
